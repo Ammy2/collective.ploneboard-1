@@ -18,7 +18,7 @@
     <div tal:replace="structure provider:plone.belowcontenttitle" />
 
     <p class="documentDescription" tal:content="context/description" />
-
+    <p class="documentDescription" tal:content="context/category" />
     <div tal:replace="structure provider:plone.abovecontentbody" />
 
     <table style="width: 100%;" class="listing nosort">

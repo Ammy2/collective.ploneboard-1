@@ -3,7 +3,6 @@ from zope.component import getMultiAdapter
 from Products.Five.browser import BrowserView
 from Products.Five.browser.pagetemplatefile import ViewPageTemplateFile
 
-
 class MessageboardView(BrowserView):
 
     template = ViewPageTemplateFile('messageboard.pt')
