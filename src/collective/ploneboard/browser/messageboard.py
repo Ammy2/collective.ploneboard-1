@@ -8,8 +8,10 @@ class MessageboardView(BrowserView):
     template = ViewPageTemplateFile('messageboard.pt')
 
     def __call__(self):
-	"""context = self.context.aq_inner
-	print context.category"""
+	context = self.context.aq_inner
+	#print context.category
+	context.cats = context.category.split('\r\n')
+	#print context.cats
         return self.template()
 
     def topics(self):
@@ -22,6 +24,7 @@ class MessageboardView(BrowserView):
             ).conversations()
             topics.append({
                 'title': topic.title,
+		'category': topic.category,
                 'url': topic.absolute_url(),
                 'conversations': conversations,
             })

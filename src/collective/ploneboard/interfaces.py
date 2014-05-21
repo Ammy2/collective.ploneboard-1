@@ -9,12 +9,12 @@ from five import grok
 
 @grok.provider(IContextSourceBinder)
 def possibleCategories(context):
-    cat = context.category
+    #cat = context.category
     terms = []
-    category = cat.split('\n')
+    category = context.cats
     #print category
     for category_i in category:
-        terms.append(SimpleVocabulary.createTerm(category_i, str(category_i), category_i))
+        terms.append(SimpleVocabulary.createTerm(str(category_i), str(category_i), str(category_i)))
     return SimpleVocabulary(terms)
 
 
@@ -26,11 +26,11 @@ class IMessageboard(form.Schema):
 		)
 
 class ITopic(form.Schema):
-    category = schema.Choice(
+    category = schema.List(            
             title=_(u"Category"),
             description=_(u"Choose to tag your Topic"),
-            source = possibleCategories,
-            required=False,
+            required=True,
+            value_type= schema.Choice(title=_(u"Ssup"),source=possibleCategories,required=False)
         )
 
 class IConversation(form.Schema):

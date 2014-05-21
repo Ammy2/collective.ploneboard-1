@@ -22,6 +22,10 @@
     <div tal:replace="structure provider:plone.abovecontentbody" />
 
     <h3 class="Category" tal:content="context/category"/>
+    <div class="Categories" tal:repeat="cat context/cats">
+    <h3 class="Category" tal:content="cat"/>
+    </div>
+
     <div class="topic" tal:repeat="topic view/topics">
       <h3>
         <a href=""
