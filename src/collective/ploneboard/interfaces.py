@@ -4,6 +4,18 @@ from plone.directives import form
 from zope import schema
 from collective.ploneboard import _
 from zope.schema.vocabulary import SimpleVocabulary, SimpleTerm
+from zope.schema.interfaces import IContextSourceBinder
+from five import grok
+
+@grok.provider(IContextSourceBinder)
+def possibleCategories(context):
+    cat = context.category
+    terms = []
+    category = cat.split('\n')
+    #print category
+    for category_i in category:
+        terms.append(SimpleVocabulary.createTerm(category_i, str(category_i), category_i))
+    return SimpleVocabulary(terms)
 
 
 class IMessageboard(form.Schema):
@@ -13,26 +25,17 @@ class IMessageboard(form.Schema):
 		required=False
 		)
 
-
 class ITopic(form.Schema):
-    """categories = SimpleVocabulary(
-    [SimpleTerm(value=u'tag1', title=_(u'Tag1')),
-     SimpleTerm(value=u'tag2', title=_(u'Tag2')),
-     SimpleTerm(value=u'tag3', title=_(u'Tag3'))]
-    )
-    """
-    
     category = schema.Choice(
             title=_(u"Category"),
             description=_(u"Choose to tag your Topic"),
-            values= ["A","B"],
+            source = possibleCategories,
             required=False,
         )
 
 class IConversation(form.Schema):
     """
     """
-
     text = RichText(
         title=_(u"Text"),
         required=True

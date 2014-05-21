@@ -8,6 +8,8 @@ class MessageboardView(BrowserView):
     template = ViewPageTemplateFile('messageboard.pt')
 
     def __call__(self):
+	"""context = self.context.aq_inner
+	print context.category"""
         return self.template()
 
     def topics(self):
