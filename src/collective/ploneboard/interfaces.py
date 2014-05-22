@@ -20,13 +20,13 @@ def possibleCategories(context):
 
 class IMessageboard(form.Schema):
 	category=schema.Text(
-		title=_(u"Categories"),
+		title=_(u"Categories for tagging Topics"),
         description=_(u"Seperate by writing in different lines"),
-		required=False
+		required=True
 		)
 
 class ITopic(form.Schema):
-    category = schema.List(            
+    category = schema.List(
             title=_(u"Category"),
             description=_(u"Choose to tag your Topic"),
             required=True,
